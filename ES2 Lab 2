@@ -1,0 +1,98 @@
+#Emmy Daro and Drew Macklin
+#time spent on assignment: 1 hour
+
+import microbit
+
+# function: fill row
+#this function takes time and row and an inputs and outputs directions to the microbit
+#the time argument sets the amount of time that the pixel "sleeps" for
+#the row argument sets what row is filled on the microbit
+#does not return a value, sends instructions to microbit
+def fill_row(time, row):
+    microbit.display.set_pixel(0,row,9)
+    microbit.sleep(time)
+    microbit.display.set_pixel(1,row,9)
+    microbit.sleep(time)
+    microbit.display.set_pixel(2,row,9)
+    microbit.sleep(time)
+    microbit.display.set_pixel(3,row,9)
+    microbit.sleep(time)
+    microbit.display.set_pixel(4,row,9)
+    microbit.sleep(time)
+
+# function: fill column
+#this function takes time and column and an inputs and outputs directions to the microbit
+#the time argument sets the amount of time that the pixel "sleeps" for
+#the column argument sets what column is filled on the microbit
+#does not return a value, sends instructions to microbit
+
+def fill_column(time, column):
+    microbit.display.set_pixel(column,0,9)
+    microbit.sleep(time)
+    microbit.display.set_pixel(column,1,9)
+    microbit.sleep(time)
+    microbit.display.set_pixel(column,2,9)
+    microbit.sleep(time)
+    microbit.display.set_pixel(column,3,9)
+    microbit.sleep(time)
+    microbit.display.set_pixel(column,4,9)
+    microbit.sleep(time)
+
+#function: blink
+#this function takes coordinates for a pixel and time as inputs
+#blinks that pixel for the inputted time by passing time into sleep
+
+def blink(x,y,time):
+        microbit.display.set_pixel(x,y,9)
+        microbit.sleep(time*1000)
+        microbit.display.set_pixel(x,y,0)
+        microbit.sleep(time*1000)
+
+#function:fill row loop
+#this funstion does the same thins as fill row but consolidates the code into loops
+#instead of writing it out line by line
+
+def fill_row_loop(time, row):
+    for i in range(5):
+        microbit.display.set_pixel(i,row,9)
+        microbit.sleep(time)
+
+#function:fill column loop
+#this funstion does the same thins as fill column but consolidates the code into loops
+#instead of writing it out line by line
+
+def fill_column_loop(time, column):
+    for i in range(5):
+        microbit.display.set_pixel(column,i,9)
+        microbit.sleep(time)
+
+#function: fill by column loop
+#This function fills the entire grid beginning at the top left corner and fills each column with a delay between
+#each light lighting up equal to "time" milliseconds
+
+def fill_by_column_loop(time):
+    for i in range(5):
+        for n in range(5):
+            microbit.display.set_pixel(i,n,9)
+            microbit.sleep(time)
+
+#function: fill by row loop
+#This function fills the entire grid beginning at the top left corner and fills each row with a delay between
+#each light lighting up equal to "time" milliseconds
+
+def fill_by_row_loop(time):
+    for i in range(5):
+        for n in range(5):
+            microbit.display.set_pixel(n,i,9)
+            microbit.sleep(time)
+
+#each of these calls make the microbit do the functions with the arguments shown below.
+#the loop calls blink four times using the for i loop
+fill_row(200,0)
+fill_column(200,0)
+fill_row_loop(1000,0)
+fill_column_loop(1000,0)
+fill_by_column_loop(1000)
+fill_by_row_loop(1000)
+for i in range(4):
+    blink(0,0,1)
