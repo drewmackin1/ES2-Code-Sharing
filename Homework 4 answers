@@ -1,0 +1,146 @@
+#Book Editor
+
+import os
+path="/Users/drewmacklin/Documents/GitHub/homework-4-drewmackin1/Words Miniproject"
+os.chdir(path)
+
+newbook = open("newbook.txt","w")
+fin = open("holmes.txt")
+
+for ln in fin:
+    wordstart = 0
+    word = " "
+    for i in range(len(ln)):
+        letter = ln[i]
+        if (letter == " "):
+            word = ln[wordstart:i]
+            wordstart = i+1
+
+            if (word == "Sherlock"):
+                newbook.write("Fiona ")
+            elif (word == "Holmes"):
+                newbook.write("Gallegher ")
+            elif(word == "he"):
+                newbook.write("she ")
+            elif(word == "He"):
+                newbook.write("She ")
+            elif(word == "his"):
+                newbook.write("her ")
+            elif(word == "I"):
+                newbook.write("Bruce ")
+            elif(word == "have"):
+                newbook.write("had ")
+            elif(word == "take"):
+                newbook.write("took ")
+            else:
+                newbook.write(word + " ")
+
+newbook.close()
+fin.close()
+
+
+
+
+
+
+#Word Play
+import os
+path="/Users/drewmacklin/Documents/GitHub/homework-4-drewmackin1/Words Miniproject"
+os.chdir(path)
+
+fout20 = open("over20_words.txt","w")
+foute = open("no_e_words.txt", "w")
+fine = open("no_e_words.txt")
+fin = open('words.txt')
+
+def is_over_20(word):
+    if len(word)>20:
+            fout20.write(word)
+            return True
+    return False
+
+def has_no_e(word):
+    if "e" in word:
+        return False
+    else:
+        foute.write(word)
+        return True
+
+
+def e_length():
+    noe=0
+    for ln in fine:
+        noe+=1
+    return noe
+
+def e_percent(a,b):
+    return 100*a/b
+
+count = 0
+for ln in fin:
+    count+=1
+    current = fin.readline()
+    is_over_20(current)
+    has_no_e(current)
+
+print(e_percent(e_length(),count))
+
+fout20.close()
+foute.close()
+fin.close()
+fine.close()
+
+# Caesar Cipher
+
+def encrypt(message, shift):
+    newmessage = ""
+    for i in range(len(message)):
+        a = ord(message[i])
+        if (65<=a<=90):
+            a+=32
+            b=chr(a)
+            newmessage += b
+        else:
+            b=chr(a)
+            newmessage += b
+    shiftedmessage = ""
+    for i in range(len(newmessage)):
+        a = ord(newmessage[i])
+        if (97<=a<=122):
+            if(a+shift<=122):
+                a+=shift
+                b=chr(a)
+                shiftedmessage += b
+            else:
+                c=abs(122-(a+shift))
+                b = chr(c+96)
+                shiftedmessage+=b
+        else:
+            b=chr(a)
+            shiftedmessage += b
+    return shiftedmessage
+
+print(encrypt("sn ad, nq mns sn ad: sgzs hr sgd ptdrshnm",1))
+    #to be or not to be: that is the question
+    #shift 1
+print(encrypt("sg2 wg am tojcfwhs qzogg",12))
+    #es2 is my favorite class
+    #shift 12
+print(encrypt("nwcz akwzm ivl amdmv gmiza iow",18))
+    #four score and seven years ago
+    #shift 18
+
+print('Testing encrypt function...')
+test_1 = encrypt('pizza', 3)
+test_2 = encrypt(test_1, 23)
+test_3 = encrypt('JUMBO', 0)
+test_4 = encrypt('!@#$%^&*()', 12)
+ans_1 = 'slccd'
+ans_2 = 'pizza'
+ans_3 = 'jumbo'
+ans_4 = '!@#$%^&*()'
+print('Test 1:\t', test_1 == ans_1)
+print('Test 2:\t', test_2 == ans_2)
+print('Test 3:\t', test_3 == ans_3)
+print('Test 4:\t', test_4 == ans_4)
+print('Done')
