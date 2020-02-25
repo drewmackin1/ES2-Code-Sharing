@@ -144,3 +144,16 @@ print('Test 2:\t', test_2 == ans_2)
 print('Test 3:\t', test_3 == ans_3)
 print('Test 4:\t', test_4 == ans_4)
 print('Done')
+
+#stopwatch
+#Drew Macklin
+#worked alone for 20 mins
+import microbit
+while True:
+    count = 0
+    while microbit.button_a.is_pressed():
+        microbit.display.set_pixel(2,2,9)
+        microbit.sleep(10)
+        count+=1
+    if (microbit.button_a.was_pressed() ==True and microbit.button_a.is_pressed() == False):
+        microbit.display.scroll(str(float(count/100)) + "Seconds")
